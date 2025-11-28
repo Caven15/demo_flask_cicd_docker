@@ -1,0 +1,7 @@
+<h1>{{ welcomeMessage() }}</h1>
+
+@if (user()) {
+  <p>Vous êtes connecté avec le rôle : {{ user()?.role }}</p>
+} @else {
+  <p>Veuillez vous connecter pour accéder à plus de fonctionnalités.</p>
+}

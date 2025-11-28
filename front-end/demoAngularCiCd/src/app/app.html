@@ -1,0 +1,22 @@
+<nav class="nav">
+  <button (click)="goTo('/home')">🏠 Accueil</button>
+  <button (click)="goTo('/login')">🔐 Connexion</button>
+  <button (click)="goTo('/register')">📝 Inscription</button>
+
+  <!-- Affiché uniquement si user connecté -->
+  @if (user()) {
+    <button (click)="goTo('/dashboard')">📊 Dashboard</button>
+  }
+</nav>
+
+<hr />
+
+<section class="content">
+  @if (user()) {
+    <h2>Bienvenue, {{ user()!.email }} 👋</h2>
+  } @else {
+    <h2>Bienvenue sur notre démo Fullstack Angular + Flask</h2>
+  }
+
+  <router-outlet />
+</section>

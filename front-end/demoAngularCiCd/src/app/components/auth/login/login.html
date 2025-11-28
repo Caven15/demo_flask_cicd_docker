@@ -1,0 +1,42 @@
+<h1>Connexion</h1>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label>Email</label>
+    <input type="email" formControlName="email" />
+
+    @if (f['email'].touched && f['email'].invalid) {
+      <div>
+        @if (f['email'].errors?.['required']) {
+          <small>Email obligatoire</small>
+        }
+        @if (f['email'].errors?.['email']) {
+          <small>Format d'email invalide</small>
+        }
+      </div>
+    }
+  </div>
+
+  <div>
+    <label>Mot de passe</label>
+    <input type="password" formControlName="password" />
+
+    @if (f['password'].touched && f['password'].invalid) {
+      <div>
+        <small>Mot de passe obligatoire</small>
+      </div>
+    }
+  </div>
+
+  <button type="submit" [disabled]="isSubmitting">
+    {{ isSubmitting ? 'Connexion...' : 'Se connecter' }}
+  </button>
+
+  @if (error) {
+    <div>
+      <p style="color: red">{{ error }}</p>
+    </div>
+  }
+
+</form>

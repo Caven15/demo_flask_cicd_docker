@@ -1,0 +1,72 @@
+<h1>Inscription</h1>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Email</label>
+    <input type="email" formControlName="email" />
+
+    @if (f['email'].touched && f['email'].invalid) {
+      <div>
+        @if (f['email'].errors?.['required']) {
+          <small>Email obligatoire</small>
+        }
+        @if (f['email'].errors?.['email']) {
+          <small>Format d'email invalide</small>
+        }
+      </div>
+    }
+  </div>
+
+  <div>
+    <label>Mot de passe</label>
+    <input type="password" formControlName="password" />
+
+    @if (f['password'].touched && f['password'].invalid) {
+      <div>
+        @if (f['password'].errors?.['required']) {
+          <small>Mot de passe obligatoire</small>
+        }
+        @if (f['password'].errors?.['minlength']) {
+          <small>
+            Minimum
+            {{ f['password'].errors?.['minlength']?.requiredLength }}
+            caractères
+          </small>
+        }
+      </div>
+    }
+  </div>
+
+  <div>
+    <label>Confirmation du mot de passe</label>
+    <input type="password" formControlName="confirmPassword" />
+
+    @if (f['confirmPassword'].touched && f['confirmPassword'].invalid) {
+      <div>
+        @if (f['confirmPassword'].errors?.['required']) {
+          <small>Confirmation obligatoire</small>
+        }
+        @if (f['confirmPassword'].errors?.['passwordMismatch']) {
+          <small>Les mots de passe ne correspondent pas</small>
+        }
+      </div>
+    }
+  </div>
+
+  <button type="submit" [disabled]="isSubmitting">
+    {{ isSubmitting ? 'Inscription...' : "S'inscrire" }}
+  </button>
+
+  @if (error) {
+    <p style="color: red">{{ error }}</p>
+  }
+
+  @if (successMessage) {
+    <p style="color: green">{{ successMessage }}</p>
+  }
+</form>
+
+<p>
+  Déjà un compte ?
+  <a routerLink="/login">Se connecter</a>
+</p>

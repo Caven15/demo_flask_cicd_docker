@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    container_name: backend_flask
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./front-end/demoAngularCiCd
+      dockerfile: Dockerfile
+    container_name: frontend_angular
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
